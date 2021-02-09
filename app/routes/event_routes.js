@@ -27,10 +27,11 @@ const requireToken = passport.authenticate('bearer', { session: false })
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
 
-// INDEX
+// INDEX (all events)
 // GET /events
 router.get('/events', requireToken, (req, res, next) => {
-  Event.find()
+  const owner = req.user.id
+  Event.find({ owner: owner })
     .then(events => {
       // `events` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -43,7 +44,7 @@ router.get('/events', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-// SHOW
+// SHOW (just one event)
 // GET /events/5a7db6c74d55bc51bdf39793
 router.get('/events/:id', requireToken, (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
@@ -72,7 +73,7 @@ router.post('/events', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-// UPDATE
+// UPDATE (just one)
 // PATCH /events/5a7db6c74d55bc51bdf39793
 router.patch('/examples/:id', requireToken, removeBlanks, (req, res, next) => {
   // if the client attempts to change the `owner` property by including a new
@@ -95,7 +96,7 @@ router.patch('/examples/:id', requireToken, removeBlanks, (req, res, next) => {
     .catch(next)
 })
 
-// DESTROY
+// DESTROY (just one)
 // DELETE /events/5a7db6c74d55bc51bdf39793
 router.delete('/events/:id', requireToken, (req, res, next) => {
   Event.findById(req.params.id)
