@@ -47,3 +47,13 @@ commands available:
 | POST   | `/sign-in`             | `users#signin`    |
 | PATCH  | `/change-password/` | `users#changepw`  |
 | DELETE | `/sign-out/`        | `users#signout`   |
+
+### Event Routes:
+
+| Verb   | URI Pattern            | Controller#Action |
+|--------|------------------------|-------------------|
+| GET   | `/events`             | `events#index`    |
+| GET   | `/events/:id`             | `events#show`    |
+| POST   | `/events`             | `events#create`    |
+| PATCH  | `/events/:id` | `events#update`  |
+| DELETE | `/events/:id`        | `events#destroy`   |
