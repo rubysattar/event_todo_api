@@ -1,5 +1,5 @@
 {
-  "name": "express-api-template",
+  "name": "event_todo_api",
   "version": "0.0.1",
   "description": "",
   "main": "server.js",
